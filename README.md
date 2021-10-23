@@ -2,8 +2,10 @@
 
 
 <!-- DESKRIPSI  -->
-Saya membuat Alarm App menggunakan FLUTTER terbaru (Flutter version 2.5.3) dan DART  (2.14.4)
+Saya membuat Alarm App menggunakan FLUTTER terbaru (Flutter version 2.5.3) dan DART (2.14.4).
 
+
+Sebelum Clone saya sarankan flutter versionnya di sesuaikan terlebih dahulu, karena takutnya ada package yang tidak support maupun syntax yang sudah usang.
 <!-- CLONE PROJECT and Running Apps-->
 1. Buka Repository terlebih dahulu ( https://github.com/faisalachmaddwic29/StockBit-Test )
 2. git clone https://github.com/faisalachmaddwic29/StockBit-Test.git (ex : Folder Alarm)
