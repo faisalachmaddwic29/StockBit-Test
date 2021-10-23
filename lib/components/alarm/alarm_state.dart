@@ -9,7 +9,7 @@ class AlarmSuccessAddData extends AlarmState {}
 
 class AlarmSuccessDeleteData extends AlarmState {}
 
-class AlarmWrongDate extends AlarmState {}
+class AlarmDataIsEmpty extends AlarmState {}
 
 class AlarmSuccessGetData extends AlarmState {
   final List<AlarmModel>? data;

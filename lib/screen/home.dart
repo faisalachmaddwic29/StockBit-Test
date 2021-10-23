@@ -70,6 +70,19 @@ class _HomeState extends State<Home> {
         DateTime selectedDateTime = DateTime(now.year, now.month, now.day,
             selectedTime.hour, selectedTime.minute);
 
+        // final comparation = selectedDateTime.compareTo(check);
+        final duration = selectedDateTime.difference(check).inSeconds;
+
+        if (selectedDateTime.millisecondsSinceEpoch <=
+            check.millisecondsSinceEpoch) {
+          alertSnackbarMessage(
+            context,
+            key: _scaffoldKey,
+            text: 'The alarm cannot be set before the current time',
+            color: Colors.yellow.shade900,
+          );
+        }
+
         if (check == selectedDateTime) {
           alertSnackbarMessage(
             context,
@@ -85,9 +98,10 @@ class _HomeState extends State<Home> {
 
           var uuid = const Uuid();
           AlarmModel? alarmModel = AlarmModel(
-            id: await AlarmSqflite().getLength() + 1,
+            // id: await AlarmSqflite().getLength() + 1,
             alarmDateTime: _alertTime ?? DateTime.now(),
             key: uuid.v1(),
+            time: duration.toString(),
             title: 'Alarm',
             isPending: true,
           );
@@ -114,7 +128,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+                FloatingActionButtonLocation.centerFloat,
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(

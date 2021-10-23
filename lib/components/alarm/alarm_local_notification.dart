@@ -22,10 +22,11 @@ AndroidNotificationDetails _androidPlatformChannelSpesifics =
     const AndroidNotificationDetails(
   "alarm_notif",
   'Change Alarm for notification',
-  sound: RawResourceAndroidNotificationSound("alarm_test.mp3"),
+  sound: RawResourceAndroidNotificationSound("alarm_test"),
+  playSound: true,
+  importance: Importance.max,
   priority: Priority.high,
-  importance: Importance.high,
-  fullScreenIntent: true,
+  // fullScreenIntent: true,
 );
 // END ANDROID
 
@@ -35,7 +36,7 @@ class AlarmNotificationService {
   static Future init(
       {bool initScheduled = false, required onSelectNotification}) async {
     var initializationSettingsAndroid =
-        const AndroidInitializationSettings('Alarm');
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
     var initializationSettingsIOS = IOSInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
@@ -78,11 +79,10 @@ class AlarmNotificationService {
   static Future<void> scheduleNotification(
       {required DateTime dateTime, required AlarmModel alarmModel}) async {
     await _configureLocalTimeZone();
-    var tzDateTime =
-        tz.TZDateTime.from(dateTime, tz.local).add(const Duration(seconds: 2));
+    var tzDateTime = tz.TZDateTime.from(dateTime, tz.local);
 
     await notifications.zonedSchedule(
-      alarmModel.id,
+      alarmModel.id ?? 0,
       alarmModel.title,
       alarmModel.alarmDateTime.toString(),
       tzDateTime,
@@ -95,7 +95,6 @@ class AlarmNotificationService {
   }
 
   static Future<void> cancelNotification({required int? id}) async {
-    debugPrint('data $id : berhasil dicancel alaramnya');
     await notifications.cancel(id ?? 0);
   }
 }

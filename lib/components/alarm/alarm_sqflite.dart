@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 const String tableAlarm = 'alarm';
 const String columnId = 'id';
 const String columnKey = 'key';
+const String columnTime = 'time';
 const String columnTitle = 'title';
 const String columnDateTime = 'alarmDateTime';
 const String columnPending = 'isPending';
@@ -16,6 +17,7 @@ class AlarmSqflite {
     // if (_database == null) {
     //   _database = await initalizeDatabase();
     // }
+
     _database ??= await initalizeDatabase();
 
     return _database;
@@ -32,7 +34,8 @@ class AlarmSqflite {
       await db.execute('''
         CREATE TABLE $tableAlarm(
           $columnId integer primary key autoincrement,
-          $columnKey integer text not null,
+          $columnKey text not null,
+          $columnTime text not null,
           $columnTitle text not null,
           $columnDateTime text not null,
           $columnPending integer)
@@ -44,6 +47,8 @@ class AlarmSqflite {
 
   Future<int> insertAlarm(AlarmModel? alarmModel) async {
     var db = await database;
+
+    // await deleteDb();
 
     var result = db!.insert(tableAlarm, alarmModel!.toMap());
     return result;
@@ -62,22 +67,11 @@ class AlarmSqflite {
       _alarms.sort((a, b) =>
           a.alarmDateTime.toString().compareTo(b.alarmDateTime.toString()));
     }
-    // _alarms.forEach((object) {
-    //   print("datetime: ${object.alarmDateTime}"); // prints: barName: foo
-    //   print("id: ${object.id}"); // prints: latitudeDbRef: bar
-    //   print("pending: ${object.isPending}"); // prints: latitudeDbRef: bar
-    // });
     return _alarms;
   }
 
   Future<int> updateAlarm(AlarmModel? alarmModel) async {
     var db = await database;
-    // print(db);
-    // print('ini dari update: ${alarmModel!.isPending}');
-    // print('ini dari id: ${alarmModel.id}');
-
-    // return await db!.update(tableAlarm, alarmModel.toMap(),
-    //     where: '$columnId = ?', whereArgs: [alarmModel.id]);
 
     return await db!.update(tableAlarm, alarmModel!.toMap(),
         where: '$columnId = ?', whereArgs: [alarmModel.id]);
@@ -98,21 +92,13 @@ class AlarmSqflite {
 
   Future<bool> deleteDb() async {
     bool databaseDeleted = false;
-
-    try {
-      String dir = await getDatabasesPath();
-      String path = join(dir, 'alarm.db');
-      await deleteDatabase(path).whenComplete(() {
-        databaseDeleted = true;
-      }).catchError((onError) {
-        databaseDeleted = false;
-      });
-      // ignore: unused_catch_clause
-    } on DatabaseException catch (error) {
-      // print(error);
-    } catch (error) {
-      // print(error);
-    }
+    String dir = await getDatabasesPath();
+    String path = join(dir, 'alarm.db');
+    await deleteDatabase(path).whenComplete(() {
+      databaseDeleted = true;
+    }).catchError((onError) {
+      databaseDeleted = false;
+    });
 
     return databaseDeleted;
   }

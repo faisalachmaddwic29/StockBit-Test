@@ -1,4 +1,5 @@
 import 'package:alarm/components/alarm/alarm_model.dart';
+import 'package:alarm/screen/detail.dart';
 import 'package:alarm/theme/theme.dart';
 import 'package:alarm/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -70,26 +71,74 @@ Widget alarmWidget(context) {
                         data: state.data![index],
                       ),
                     ),
-                    // onTap: () {
-                    //   AlarmNotificationService.showNotification(
-                    //     body: 'test',
-                    //     title: 'test',
-                    //     payload: jsonEncode(state.data![index].toMap()),
-                    //     id: state.data![index].id,
-                    //   );
-                    //   context.read<AlarmBloc>().add(
-                    //         UpdateAlarmEvent(
-                    //           alarmModel: state.data![index],
-                    //           isActive: state.data![index].isPending,
-                    //           from: 'switch',
-                    //         ),
-                    //       );
-                    // },
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Detail(
+                                alarmBloc: context.read<AlarmBloc>(),
+                                payload: state.data![index],
+                              )));
+                      // AlarmNotificationService.showNotification(
+                      //   body: 'test',
+                      //   title: 'test',
+                      //   payload: jsonEncode(state.data![index].toMap()),
+                      //   id: state.data![index].id,
+                      // );
+                      // context.read<AlarmBloc>().add(
+                      //       UpdateAlarmEvent(
+                      //         alarmModel: state.data![index],
+                      //         isActive: state.data![index].isPending,
+                      //         from: 'switch',
+                      //       ),
+                      //     );
+                    },
                   );
                 },
               );
             }
-            return const SizedBox();
+
+            if (state is AlarmDataIsEmpty) {
+              return SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 2.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sorry, Alarm is Empty',
+                      style: headlineTextStyle.copyWith(fontSize: 14),
+                    ),
+                    Text(
+                      'Please insert in the data with the button below',
+                      style: headlineTextStyle.copyWith(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 2.2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Sorry, Alarm is Empty',
+                    style: headlineTextStyle,
+                  ),
+                  Text(
+                    'Please insert in the data with the button below',
+                    style: headlineTextStyle.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
+            );
           },
         ),
       )
@@ -116,7 +165,7 @@ class _CustomSwitchButtonState extends State<CustomSwitchButton> {
       value: isSwitched ?? widget.value,
       onChanged: (value) {
         setState(() {
-          isSwitched = value;
+          isSwitched = false;
         });
         context.read<AlarmBloc>().add(UpdateAlarmEvent(
             alarmModel: widget.data,

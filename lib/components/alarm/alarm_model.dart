@@ -1,13 +1,15 @@
 class AlarmModel {
-  int id;
+  int? id;
   String key;
+  String? time;
   String title;
   DateTime alarmDateTime;
   bool isPending;
 
   AlarmModel(
-      {required this.id,
+      {this.id,
       required this.key,
+      this.time,
       required this.title,
       required this.alarmDateTime,
       required this.isPending});
@@ -16,6 +18,7 @@ class AlarmModel {
     return AlarmModel(
       id: json['id'],
       key: json['key'],
+      time: json['time'],
       title: json['title'],
       alarmDateTime: DateTime.parse(json['alarmDateTime']),
       isPending: (json['isPending'] == 1) ? true : false,
@@ -25,6 +28,7 @@ class AlarmModel {
   Map<String, dynamic> toMap() => {
         "id": id,
         "key": key,
+        "time": time,
         "title": title,
         "alarmDateTime": alarmDateTime.toIso8601String(),
         "isPending": (isPending) ? 1 : 0,
