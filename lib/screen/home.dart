@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:alarm/components/alarm/alarm_bloc.dart';
 import 'package:alarm/components/alarm/alarm_local_notification.dart';
 import 'package:alarm/components/alarm/alarm_model.dart';
-import 'package:alarm/components/alarm/alarm_sqflite.dart';
 import 'package:alarm/components/alarm/alarm_widget.dart';
 import 'package:alarm/components/clock/clock_widget.dart';
 import 'package:alarm/screen/detail.dart';
@@ -73,22 +72,20 @@ class _HomeState extends State<Home> {
         // final comparation = selectedDateTime.compareTo(check);
         final duration = selectedDateTime.difference(check).inSeconds;
 
-        if (selectedDateTime.millisecondsSinceEpoch <=
-            check.millisecondsSinceEpoch) {
-          alertSnackbarMessage(
-            context,
-            key: _scaffoldKey,
-            text: 'The alarm cannot be set before the current time',
-            color: Colors.yellow.shade900,
-          );
-        }
-
         if (check == selectedDateTime) {
           alertSnackbarMessage(
             context,
             key: _scaffoldKey,
             text: 'The alarm cannot be the same as the current time',
-            color: Colors.yellow.shade900,
+            color: Colors.green.shade500,
+          );
+        } else if (selectedDateTime.millisecondsSinceEpoch <=
+            check.millisecondsSinceEpoch) {
+          alertSnackbarMessage(
+            context,
+            key: _scaffoldKey,
+            text: 'The alarm cannot be set before the current time',
+            color: Colors.green.shade500,
           );
         } else {
           _alertTime = selectedDateTime;

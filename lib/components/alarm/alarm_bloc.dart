@@ -21,8 +21,9 @@ class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
         var data = await _alarmSqflite.getAlarms();
         if (data.isEmpty) {
           emit(AlarmDataIsEmpty());
+        } else {
+          emit(AlarmSuccessGetData(data: data));
         }
-        emit(AlarmSuccessGetData(data: data));
       }
 
       if (event is AlarmGetData) {
@@ -31,8 +32,9 @@ class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
 
         if (data.isEmpty) {
           emit(AlarmDataIsEmpty());
+        } else {
+          emit(AlarmSuccessGetData(data: data));
         }
-        emit(AlarmSuccessGetData(data: data));
       }
 
       if (event is InsertAlarmEvent) {

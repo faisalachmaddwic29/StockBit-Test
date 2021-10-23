@@ -7,7 +7,7 @@ Future alertSnackbarMessage(context,
   final SnackBar snackBar = SnackBar(
     content: Text(text),
     backgroundColor: color,
-    duration: const Duration(seconds: 3),
+    duration: const Duration(seconds: 2),
     shape: const StadiumBorder(),
     behavior: SnackBarBehavior.floating,
   );

@@ -2,6 +2,7 @@ import 'package:alarm/components/alarm/alarm_model.dart';
 import 'package:alarm/screen/detail.dart';
 import 'package:alarm/theme/theme.dart';
 import 'package:alarm/utils/utils.dart';
+import 'package:alarm/widgets/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -71,26 +72,14 @@ Widget alarmWidget(context) {
                         data: state.data![index],
                       ),
                     ),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Detail(
-                                alarmBloc: context.read<AlarmBloc>(),
-                                payload: state.data![index],
-                              )));
-                      // AlarmNotificationService.showNotification(
-                      //   body: 'test',
-                      //   title: 'test',
-                      //   payload: jsonEncode(state.data![index].toMap()),
-                      //   id: state.data![index].id,
-                      // );
-                      // context.read<AlarmBloc>().add(
-                      //       UpdateAlarmEvent(
-                      //         alarmModel: state.data![index],
-                      //         isActive: state.data![index].isPending,
-                      //         from: 'switch',
-                      //       ),
-                      //     );
-                    },
+                    onTap: null,
+                    // onTap: () {
+                    //   // Navigator.of(context).push(MaterialPageRoute(
+                    //   //     builder: (context) => Detail(
+                    //   //           alarmBloc: context.read<AlarmBloc>(),
+                    //   //           payload: state.data![index],
+                    //   //         )));
+                    // },
                   );
                 },
               );
@@ -158,6 +147,8 @@ class CustomSwitchButton extends StatefulWidget {
 }
 
 class _CustomSwitchButtonState extends State<CustomSwitchButton> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   bool? isSwitched;
   @override
   Widget build(BuildContext context) {
@@ -166,7 +157,17 @@ class _CustomSwitchButtonState extends State<CustomSwitchButton> {
       onChanged: (value) {
         setState(() {
           isSwitched = false;
+
+          if (value) {
+            alertSnackbarMessage(
+              context,
+              key: _scaffoldKey,
+              text: 'This feature for update active still in development',
+              color: Colors.green.shade500,
+            );
+          }
         });
+
         context.read<AlarmBloc>().add(UpdateAlarmEvent(
             alarmModel: widget.data,
             isActive: isSwitched ?? false,
