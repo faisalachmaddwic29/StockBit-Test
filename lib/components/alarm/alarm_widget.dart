@@ -1,5 +1,4 @@
 import 'package:alarm/components/alarm/alarm_model.dart';
-import 'package:alarm/screen/detail.dart';
 import 'package:alarm/theme/theme.dart';
 import 'package:alarm/utils/utils.dart';
 import 'package:alarm/widgets/alert.dart';
