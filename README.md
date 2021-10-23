@@ -1,16 +1,26 @@
 # alarm
 
-A new Flutter project.
 
-## Getting Started
+<!-- DESKRIPSI  -->
+Saya membuat Alarm App menggunakan FLUTTER terbaru (Flutter version 2.5.3) dan DART  (2.14.4)
 
-This project is a starting point for a Flutter application.
+<!-- CLONE PROJECT and Running Apps-->
+1. Buka Repository terlebih dahulu ( https://github.com/faisalachmaddwic29/StockBit-Test )
+2. git clone https://github.com/faisalachmaddwic29/StockBit-Test.git (ex : Folder Alarm)
+3. Buka Folder (Alarm) terlebih dahulu (cd Alarm)
+4. buka Terminal ketikan (flutter pub get) atau buka file pubspec.yaml di vscode lalu klik save --maka akan otomatis menginstall package yang digunakan
+5. Jika menggunakan vsCode bisa klik Run and Debug atau kalau dari terminal bisa menggunakan (flutter run)
 
-A few resources to get you started if this is your first Flutter project:
+<!-- PACKAGE yang di gunakan -->
+1. flutter_bloc = untuk state Management
+2. flutter_local_notifications = untuk notification local
+3. flutter_native_timezone = untuk mendapatkan data lokasi waktu id
+4. google_fonts = untuk custom font
+5. intl = untuk menformat DATETIME
+6. sqflite = untuk menyimpan data di local
+7. syncfusion_flutter_charts = untuk vertical bar charts
+8. uuid = untuk generate key notification (tapi tidak jadi dipakai)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Mohon maaf apabila kirimnya terlalu mepet waktunya semoga suka.
+Terima Kasih
+Faisal Achmad Dwi Cahyono
