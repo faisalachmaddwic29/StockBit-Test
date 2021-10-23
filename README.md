@@ -3,6 +3,7 @@
 
 <!-- DESKRIPSI  -->
 Saya membuat Alarm App menggunakan FLUTTER terbaru (Flutter version 2.5.3) dan DART (2.14.4).
+Jadi di Aplikasi ini saya membuat Alarm bisa aktif dan tidak, lalu ketika di set alarm akan muncul notifikasi dan juga ada fitur dark themenya
 
 
 Sebelum Clone saya sarankan flutter versionnya di sesuaikan terlebih dahulu, karena takutnya ada package yang tidak support maupun syntax yang sudah usang.
