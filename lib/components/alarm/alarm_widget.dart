@@ -109,7 +109,7 @@ Widget alarmWidget(context) {
                       style: headlineTextStyle.copyWith(fontSize: 14),
                     ),
                     Text(
-                      'Please insert in the data with the button below',
+                      'Please insert the data with the button below',
                       style: headlineTextStyle.copyWith(
                         fontWeight: FontWeight.w300,
                         fontSize: 11,
@@ -131,7 +131,7 @@ Widget alarmWidget(context) {
                     style: headlineTextStyle,
                   ),
                   Text(
-                    'Please insert in the data with the button below',
+                    'Please insert the data with the button below',
                     style: headlineTextStyle.copyWith(
                       fontWeight: FontWeight.w300,
                     ),
